@@ -3,61 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepal Leadership Vote</title>
+    <title>Vote Nepal</title>
     <style>
-        body {
-            background: url('https://source.unsplash.com/1600x900/?nepal,mountains') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .candidate {
-            display: inline-block;
-            margin: 20px;
-        }
-        .candidate img {
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .votes {
-            font-size: 20px;
-            margin-top: 10px;
-        }
+        body { text-align: center; font-family: Arial, sans-serif; }
+        img { width: 150px; height: auto; margin: 10px; display: block; }
+        .container { display: flex; justify-content: center; align-items: center; gap: 20px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>Nepal Leadership Vote</h1>
+
+    <h2>Vote for Your Choice</h2>
+
     <div class="container">
-        <div class="candidate" onclick="vote('king')">
+        <div>
             <img src="king.jpg" alt="King">
-            <p>Vote for King</p>
-            <p class="votes" id="kingVotes">0 Votes</p>
+            <button onclick="vote('king')">Vote for King</button>
+            <p id="king-votes">Votes: 0</p>
         </div>
-        <div class="candidate" onclick="vote('president')">
+
+        <div>
             <img src="president.jpg" alt="President">
-            <p>Vote for President</p>
-            <p class="votes" id="presidentVotes">0 Votes</p>
+            <button onclick="vote('president')">Vote for President</button>
+            <p id="president-votes">Votes: 0</p>
         </div>
     </div>
+
     <script>
-        let kingVotes = 0;
-        let presidentVotes = 0;
-        
-        function vote(option) {
-            if (option === 'king') {
+        let kingVotes = localStorage.getItem("kingVotes") || 0;
+        let presidentVotes = localStorage.getItem("presidentVotes") || 0;
+
+        document.getElementById("king-votes").textContent = "Votes: " + kingVotes;
+        document.getElementById("president-votes").textContent = "Votes: " + presidentVotes;
+
+        function vote(candidate) {
+            if (candidate === "king") {
                 kingVotes++;
-                document.getElementById('kingVotes').innerText = kingVotes + ' Votes';
-            } else {
+                localStorage.setItem("kingVotes", kingVotes);
+                document.getElementById("king-votes").textContent = "Votes: " + kingVotes;
+            } else if (candidate === "president") {
                 presidentVotes++;
-                document.getElementById('presidentVotes').innerText = presidentVotes + ' Votes';
+                localStorage.setItem("presidentVotes", presidentVotes);
+                document.getElementById("president-votes").textContent = "Votes: " + presidentVotes;
             }
         }
     </script>
+
 </body>
 </html>
+
