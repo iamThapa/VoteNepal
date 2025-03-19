@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Leadership Vote</title>
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?nepal,mountains') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .candidate {
+            display: inline-block;
+            margin: 20px;
+        }
+        .candidate img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .votes {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nepal Leadership Vote</h1>
+    <div class="container">
+        <div class="candidate" onclick="vote('king')">
+            <img src="king.jpg" alt="King">
+            <p>Vote for King</p>
+            <p class="votes" id="kingVotes">0 Votes</p>
+        </div>
+        <div class="candidate" onclick="vote('president')">
+            <img src="president.jpg" alt="President">
+            <p>Vote for President</p>
+            <p class="votes" id="presidentVotes">0 Votes</p>
+        </div>
+    </div>
+    <script>
+        let kingVotes = 0;
+        let presidentVotes = 0;
+        
+        function vote(option) {
+            if (option === 'king') {
+                kingVotes++;
+                document.getElementById('kingVotes').innerText = kingVotes + ' Votes';
+            } else {
+                presidentVotes++;
+                document.getElementById('presidentVotes').innerText = presidentVotes + ' Votes';
+            }
+        }
+    </script>
+</body>
+</html>
