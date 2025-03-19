@@ -64,6 +64,28 @@ button:hover {
             }
         }
     </script>
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  // Firebase configuration (Replace with your actual Firebase config)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "votenepal.firebaseapp.com",
+    projectId: "votenepal",
+    storageBucket: "votenepal.appspot.com",
+    messagingSenderId: "202357108781",
+    appId: "1:202357108781:web:aaa9c796dbffad7202f264",
+    measurementId: "G-6KZ80MTHT8"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+</script>
+
+    
+    
 
 </body>
 </html>
