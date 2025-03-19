@@ -83,8 +83,54 @@ button:hover {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
         console.log("Firebase Initialized:", app);
+        
 
 </script>
+    <script>
+  // Initialize Firebase (Add your Firebase config here)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  function submitVote(candidateName) {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      alert("You must be logged in to vote.");
+      return;
+    }
+
+    const voterId = user.uid;
+
+    // Check if user has already voted
+    db.collection("votes")
+      .where("voterId", "==", voterId)
+      .get()
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          alert("You have already voted!");
+        } else {
+          // Save the vote
+          db.collection("votes").add({
+            candidate: candidateName,
+            voterId: voterId,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          }).then(() => {
+            alert("Vote submitted successfully!");
+          }).catch((error) => {
+            console.error("Error saving vote: ", error);
+          });
+        }
+      });
+  }
+</script>
+
 
     
     
